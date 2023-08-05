@@ -32,7 +32,7 @@ Battery18650Stats battery();
 
 Constructor parameters:
 ```cpp
-Battery18650Stats(<adc_pin>, <conversion_factor>, <reads>);
+Battery18650Stats(<adc_pin>, <conversion_factor>, <reads>, <maxVoltage>, <minVoltage>);
 ```
 
 - `adc_pin` (optional): The ADC Pin that lib will read (analogRead) to calculate charge level. Can be obtained at device datasheet. Default Value: `35`;
@@ -53,6 +53,9 @@ Returns the current battery charge level.
   - Parameter `bool useConversionTable`: Indicates if the internal charge level will be obtained using the internal predefined conversion table instead the formula (default). Default value: `false`
 > Attention! Using predefined conversion table will consume more RAM than using the formula.
 
+#### Method `int pinRead()`
+Returns the current analog read.
+
 ### Usage example
 ```cpp
 #include <Battery18650Stats.h>
@@ -69,6 +72,8 @@ void setup() {
   
   Serial.print("Charge level (using the reference table): ");
   Serial.println(battery.getBatteryChargeLevel(true));
+
+  Serial.println("Average pin reading: " + String(battery.pinRead()) + ", Voltage: " + String(battery.getBatteryVolts()) + ", Charge Level: " + String(battery.getBatteryChargeLevel(true));
 }
 
 void loop {
