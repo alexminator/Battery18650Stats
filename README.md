@@ -19,12 +19,15 @@ To use this Lib, you need to import and setup:
 
 // #define ADC_PIN 35 
 // #define CONVERSION_FACTOR 1.7 
-// #define READS 5 
+// #define READS 5
+// #define MAXV  4.08
+// #define MINV  3.20
 
 Battery18650Stats battery();
 // Battery18650Stats battery(ADC_PIN);
 // Battery18650Stats battery(ADC_PIN, CONVERSION_FACTOR);
 // Battery18650Stats battery(ADC_PIN, CONVERSION_FACTOR, READS);
+// Battery18650Stats battery(ADC_PIN, CONVERSION_FACTOR, READS, MAXV, MINV);
 ```
 
 Constructor parameters:
@@ -35,6 +38,8 @@ Battery18650Stats(<adc_pin>, <conversion_factor>, <reads>);
 - `adc_pin` (optional): The ADC Pin that lib will read (analogRead) to calculate charge level. Can be obtained at device datasheet. Default Value: `35`;
 - `conversion_factor` (optional): Value used to convert ADC pin reading in real battery voltage. This value can be obtained through comparisons between code result and a voltmeter result. Default Value: `1.702`;
 - `reads` (optional): Quantity of reads to get an average of pin readings. Its used due pin reading instabilities. Default Value: `20`;
+- `maxVoltage` (optional): Maximum voltage to consider the battery fully charged to 100%. Default Value: `4.20`;
+- `minVoltage` (optional): Minimum voltage to consider that the battery needs to be recharged. Default Value: `3.20`;
 
 ### Methods
 
